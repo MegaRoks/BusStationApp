@@ -1,0 +1,56 @@
+﻿@model WebAppBusStation.Models.bus
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>Удаление</h2>
+
+<h3>Вы уверены, что хотите удалить это?</h3>
+<div>
+    <h4>Автобусы</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Бортовой номер")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.board_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Регистрационный номер")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.regist_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Число мест")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number_of_places)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Марка")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mark)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

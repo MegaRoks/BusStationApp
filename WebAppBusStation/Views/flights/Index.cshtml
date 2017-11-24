@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebAppBusStation.Models.flight>
+
+@{
+    ViewBag.Title = "Рейсы";
+}
+
+<h2>Рейсы</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Видитель")
+        </th>
+        <th>
+            @Html.DisplayName("Регистрационный номер")
+        </th>
+        <th>
+            @Html.DisplayName("Маршрут")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.driver)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bus.regist_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.route.destination)
+        </td>
+        <td>
+            <span> @Html.ActionLink("Изменить", "Edit", new { id = item.ID_flight })</span>
+            <span> @Html.ActionLink("Удалить", "Delete", new { id = item.ID_flight })</span>
+        </td>
+    </tr>
+}
+
+</table>

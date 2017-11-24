@@ -1,0 +1,80 @@
+﻿@model WebAppBusStation.Models.route
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>Удаление</h2>
+
+<h3>Вы уверены, что хотите удалить это?</h3>
+<div>
+    <h4>Маршруты</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Пункт назначения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.destination)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Время отправления")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departure_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Номер маршрута")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.route_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Дни движения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.days_of_movement)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Расстояние")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ценя за билет")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Остановка")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stopping.stop_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

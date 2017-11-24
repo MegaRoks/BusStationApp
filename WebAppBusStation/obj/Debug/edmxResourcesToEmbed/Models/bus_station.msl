@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище bus_stationModelContainer" CdmEntityContainer="bus_stationEntities">
+    <EntitySetMapping Name="bus">
+      <EntityTypeMapping TypeName="bus_stationModel.bus">
+        <MappingFragment StoreEntitySet="bus">
+          <ScalarProperty Name="ID_bus" ColumnName="ID_bus" />
+          <ScalarProperty Name="board_number" ColumnName="board_number" />
+          <ScalarProperty Name="regist_number" ColumnName="regist_number" />
+          <ScalarProperty Name="number_of_places" ColumnName="number_of_places" />
+          <ScalarProperty Name="mark" ColumnName="mark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="buses">
+      <EntityTypeMapping TypeName="bus_stationModel.buses">
+        <MappingFragment StoreEntitySet="buses">
+          <ScalarProperty Name="f_ID_stopping" ColumnName="f_ID_stopping" />
+          <ScalarProperty Name="f_stop_name" ColumnName="f_stop_name" />
+          <ScalarProperty Name="f_arrival_time" ColumnName="f_arrival_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="flight">
+      <EntityTypeMapping TypeName="bus_stationModel.flight">
+        <MappingFragment StoreEntitySet="flight">
+          <ScalarProperty Name="ID_flight" ColumnName="ID_flight" />
+          <ScalarProperty Name="driver" ColumnName="driver" />
+          <ScalarProperty Name="ID_bus" ColumnName="ID_bus" />
+          <ScalarProperty Name="ID_route" ColumnName="ID_route" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="route">
+      <EntityTypeMapping TypeName="bus_stationModel.route">
+        <MappingFragment StoreEntitySet="route">
+          <ScalarProperty Name="ID_route" ColumnName="ID_route" />
+          <ScalarProperty Name="destination" ColumnName="destination" />
+          <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+          <ScalarProperty Name="route_number" ColumnName="route_number" />
+          <ScalarProperty Name="days_of_movement" ColumnName="days_of_movement" />
+          <ScalarProperty Name="distance" ColumnName="distance" />
+          <ScalarProperty Name="ticket_price" ColumnName="ticket_price" />
+          <ScalarProperty Name="ID_stopping" ColumnName="ID_stopping" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stopping">
+      <EntityTypeMapping TypeName="bus_stationModel.stopping">
+        <MappingFragment StoreEntitySet="stopping">
+          <ScalarProperty Name="ID_stopping" ColumnName="ID_stopping" />
+          <ScalarProperty Name="stop_name" ColumnName="stop_name" />
+          <ScalarProperty Name="arrival_time" ColumnName="arrival_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

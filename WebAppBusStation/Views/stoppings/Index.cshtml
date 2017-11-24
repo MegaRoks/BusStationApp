@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebAppBusStation.Models.stopping>
+
+@{
+    ViewBag.Title = "Остановки";
+}
+
+<h2>Остановки</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Название")
+        </th>
+        <th>
+            @Html.DisplayName("Время пребытия")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.stop_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.arrival_time)
+        </td>
+        <td>
+            <span> @Html.ActionLink("Изменить", "Edit", new { id = item.ID_stopping })</span>
+            <span> @Html.ActionLink("Удалить", "Delete", new { id = item.ID_stopping })</span>
+        </td>
+    </tr>
+}
+
+</table>

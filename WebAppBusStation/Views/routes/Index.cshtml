@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebAppBusStation.Models.route>
+
+@{
+    ViewBag.Title = "Маршруты";
+}
+
+<h2>Маршруты</h2>
+
+<p>
+    @Html.ActionLink("Добавление", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("ПУнкт назначения")
+        </th>
+        <th>
+            @Html.DisplayName("Время отправления")
+        </th>
+        <th>
+            @Html.DisplayName("Номер маршрута")
+        </th>
+        <th>
+            @Html.DisplayName("Дни движения")
+        </th>
+        <th>
+            @Html.DisplayName("Расстояние")
+        </th>
+        <th>
+            @Html.DisplayName("Стоимость билета")
+        </th>
+        <th>
+            @Html.DisplayName("Остановка")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.destination)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departure_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.route_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.days_of_movement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.distance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stopping.stop_name)
+        </td>
+        <td>
+            <span> @Html.ActionLink("Изменить", "Edit", new { id = item.ID_route })</span>
+            <span> @Html.ActionLink("Удалить", "Delete", new { id = item.ID_route })</span>
+        </td>
+    </tr>
+}
+
+</table>

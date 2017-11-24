@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище bus_stationModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bus">
+          <Key>
+            <PropertyRef Name="ID_bus" />
+          </Key>
+          <Property Name="ID_bus" Type="int" Nullable="false" />
+          <Property Name="board_number" Type="int" Nullable="false" />
+          <Property Name="regist_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="number_of_places" Type="int" Nullable="false" />
+          <Property Name="mark" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="buses">
+          <Key>
+            <PropertyRef Name="f_ID_stopping" />
+          </Key>
+          <Property Name="f_ID_stopping" Type="int" Nullable="false" />
+          <Property Name="f_stop_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="f_arrival_time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="flight">
+          <Key>
+            <PropertyRef Name="ID_flight" />
+          </Key>
+          <Property Name="ID_flight" Type="int" Nullable="false" />
+          <Property Name="driver" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="ID_bus" Type="int" Nullable="false" />
+          <Property Name="ID_route" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="route">
+          <Key>
+            <PropertyRef Name="ID_route" />
+          </Key>
+          <Property Name="ID_route" Type="int" Nullable="false" />
+          <Property Name="destination" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="departure_time" Type="datetime" Nullable="false" />
+          <Property Name="route_number" Type="int" Nullable="false" />
+          <Property Name="days_of_movement" Type="datetime" Nullable="false" />
+          <Property Name="distance" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ticket_price" Type="money" Nullable="false" />
+          <Property Name="ID_stopping" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stopping">
+          <Key>
+            <PropertyRef Name="ID_stopping" />
+          </Key>
+          <Property Name="ID_stopping" Type="int" Nullable="false" />
+          <Property Name="stop_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="arrival_time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="KF_bus_station_bus">
+          <End Role="bus" Type="Self.bus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="flight" Type="Self.flight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bus">
+              <PropertyRef Name="ID_bus" />
+            </Principal>
+            <Dependent Role="flight">
+              <PropertyRef Name="ID_bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KF_bus_station_route">
+          <End Role="route" Type="Self.route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="flight" Type="Self.flight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="route">
+              <PropertyRef Name="ID_route" />
+            </Principal>
+            <Dependent Role="flight">
+              <PropertyRef Name="ID_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KF_route_stopping">
+          <End Role="stopping" Type="Self.stopping" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="route" Type="Self.route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stopping">
+              <PropertyRef Name="ID_stopping" />
+            </Principal>
+            <Dependent Role="route">
+              <PropertyRef Name="ID_stopping" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище bus_stationModelContainer">
+          <EntitySet Name="bus" EntityType="Self.bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buses" EntityType="Self.buses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flight" EntityType="Self.flight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="route" EntityType="Self.route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stopping" EntityType="Self.stopping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="KF_bus_station_bus" Association="Self.KF_bus_station_bus">
+            <End Role="bus" EntitySet="bus" />
+            <End Role="flight" EntitySet="flight" />
+          </AssociationSet>
+          <AssociationSet Name="KF_bus_station_route" Association="Self.KF_bus_station_route">
+            <End Role="route" EntitySet="route" />
+            <End Role="flight" EntitySet="flight" />
+          </AssociationSet>
+          <AssociationSet Name="KF_route_stopping" Association="Self.KF_route_stopping">
+            <End Role="stopping" EntitySet="stopping" />
+            <End Role="route" EntitySet="route" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bus_stationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bus">
+          <Key>
+            <PropertyRef Name="ID_bus" />
+          </Key>
+          <Property Name="ID_bus" Type="Int32" Nullable="false" />
+          <Property Name="board_number" Type="Int32" Nullable="false" />
+          <Property Name="regist_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number_of_places" Type="Int32" Nullable="false" />
+          <Property Name="mark" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="flight" Relationship="Self.KF_bus_station_bus" FromRole="bus" ToRole="flight" />
+        </EntityType>
+        <EntityType Name="buses">
+          <Key>
+            <PropertyRef Name="f_ID_stopping" />
+          </Key>
+          <Property Name="f_ID_stopping" Type="Int32" Nullable="false" />
+          <Property Name="f_stop_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="f_arrival_time" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="flight">
+          <Key>
+            <PropertyRef Name="ID_flight" />
+          </Key>
+          <Property Name="ID_flight" Type="Int32" Nullable="false" />
+          <Property Name="driver" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_bus" Type="Int32" Nullable="false" />
+          <Property Name="ID_route" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bus" Relationship="Self.KF_bus_station_bus" FromRole="flight" ToRole="bus" />
+          <NavigationProperty Name="route" Relationship="Self.KF_bus_station_route" FromRole="flight" ToRole="route" />
+        </EntityType>
+        <EntityType Name="route">
+          <Key>
+            <PropertyRef Name="ID_route" />
+          </Key>
+          <Property Name="ID_route" Type="Int32" Nullable="false" />
+          <Property Name="destination" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departure_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="route_number" Type="Int32" Nullable="false" />
+          <Property Name="days_of_movement" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="distance" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ticket_price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ID_stopping" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="flight" Relationship="Self.KF_bus_station_route" FromRole="route" ToRole="flight" />
+          <NavigationProperty Name="stopping" Relationship="Self.KF_route_stopping" FromRole="route" ToRole="stopping" />
+        </EntityType>
+        <EntityType Name="stopping">
+          <Key>
+            <PropertyRef Name="ID_stopping" />
+          </Key>
+          <Property Name="ID_stopping" Type="Int32" Nullable="false" />
+          <Property Name="stop_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="arrival_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="route" Relationship="Self.KF_route_stopping" FromRole="stopping" ToRole="route" />
+        </EntityType>
+        <Association Name="KF_bus_station_bus">
+          <End Role="bus" Type="Self.bus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="flight" Type="Self.flight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bus">
+              <PropertyRef Name="ID_bus" />
+            </Principal>
+            <Dependent Role="flight">
+              <PropertyRef Name="ID_bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KF_bus_station_route">
+          <End Role="route" Type="Self.route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="flight" Type="Self.flight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="route">
+              <PropertyRef Name="ID_route" />
+            </Principal>
+            <Dependent Role="flight">
+              <PropertyRef Name="ID_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KF_route_stopping">
+          <End Role="stopping" Type="Self.stopping" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="route" Type="Self.route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stopping">
+              <PropertyRef Name="ID_stopping" />
+            </Principal>
+            <Dependent Role="route">
+              <PropertyRef Name="ID_stopping" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bus_stationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bus" EntityType="Self.bus" />
+          <EntitySet Name="buses" EntityType="Self.buses" />
+          <EntitySet Name="flight" EntityType="Self.flight" />
+          <EntitySet Name="route" EntityType="Self.route" />
+          <EntitySet Name="stopping" EntityType="Self.stopping" />
+          <AssociationSet Name="KF_bus_station_bus" Association="Self.KF_bus_station_bus">
+            <End Role="bus" EntitySet="bus" />
+            <End Role="flight" EntitySet="flight" />
+          </AssociationSet>
+          <AssociationSet Name="KF_bus_station_route" Association="Self.KF_bus_station_route">
+            <End Role="route" EntitySet="route" />
+            <End Role="flight" EntitySet="flight" />
+          </AssociationSet>
+          <AssociationSet Name="KF_route_stopping" Association="Self.KF_route_stopping">
+            <End Role="stopping" EntitySet="stopping" />
+            <End Role="route" EntitySet="route" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bus_stationModelContainer" CdmEntityContainer="bus_stationEntities">
+          <EntitySetMapping Name="bus">
+            <EntityTypeMapping TypeName="bus_stationModel.bus">
+              <MappingFragment StoreEntitySet="bus">
+                <ScalarProperty Name="ID_bus" ColumnName="ID_bus" />
+                <ScalarProperty Name="board_number" ColumnName="board_number" />
+                <ScalarProperty Name="regist_number" ColumnName="regist_number" />
+                <ScalarProperty Name="number_of_places" ColumnName="number_of_places" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buses">
+            <EntityTypeMapping TypeName="bus_stationModel.buses">
+              <MappingFragment StoreEntitySet="buses">
+                <ScalarProperty Name="f_ID_stopping" ColumnName="f_ID_stopping" />
+                <ScalarProperty Name="f_stop_name" ColumnName="f_stop_name" />
+                <ScalarProperty Name="f_arrival_time" ColumnName="f_arrival_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flight">
+            <EntityTypeMapping TypeName="bus_stationModel.flight">
+              <MappingFragment StoreEntitySet="flight">
+                <ScalarProperty Name="ID_flight" ColumnName="ID_flight" />
+                <ScalarProperty Name="driver" ColumnName="driver" />
+                <ScalarProperty Name="ID_bus" ColumnName="ID_bus" />
+                <ScalarProperty Name="ID_route" ColumnName="ID_route" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="route">
+            <EntityTypeMapping TypeName="bus_stationModel.route">
+              <MappingFragment StoreEntitySet="route">
+                <ScalarProperty Name="ID_route" ColumnName="ID_route" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+                <ScalarProperty Name="route_number" ColumnName="route_number" />
+                <ScalarProperty Name="days_of_movement" ColumnName="days_of_movement" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="ticket_price" ColumnName="ticket_price" />
+                <ScalarProperty Name="ID_stopping" ColumnName="ID_stopping" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stopping">
+            <EntityTypeMapping TypeName="bus_stationModel.stopping">
+              <MappingFragment StoreEntitySet="stopping">
+                <ScalarProperty Name="ID_stopping" ColumnName="ID_stopping" />
+                <ScalarProperty Name="stop_name" ColumnName="stop_name" />
+                <ScalarProperty Name="arrival_time" ColumnName="arrival_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
