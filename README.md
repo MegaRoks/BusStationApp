@@ -1,5 +1,5 @@
 # BusStationApp
-Applications for the airport, with a schedule of flights, with routes, with bus numbers and names of stops.
+Applications for the bus station, with a schedule of flights, with routes, with bus numbers and stop names.
 
 <h3>Contribute</h3>
 Contributions are very welcome!
